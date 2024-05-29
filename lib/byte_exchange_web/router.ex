@@ -63,7 +63,9 @@ defmodule ByteExchangeWeb.Router do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
-      live "/:thread_title/post/new", PostCreationLive
+      live "/discovery/new", DiscoveryLive, :new
+
+      live "/thread/:thread_title/post/new", ThreadLive, :new
     end
   end
 
@@ -72,18 +74,19 @@ defmodule ByteExchangeWeb.Router do
 
     get "/", PageController, :home
 
-    live "/home", HomeLive
-    live "/post", PostLive
-    live "/discovery", DiscoveryLive
-    live "/thread/:thread_title", ThreadLive
-    live "/thread/:thread_title/post/:id", PostLive
-
     delete "/users/log_out", UserSessionController, :delete
 
     live_session :current_user,
       on_mount: [{ByteExchangeWeb.UserAuth, :mount_current_user}] do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+
+      live "/home", HomeLive
+      live "/post/:id", PostLive
+      live "/user/:id", ProfileLive
+      live "/discovery", DiscoveryLive
+      live "/thread/:thread_title", ThreadLive
+      live "/thread/:thread_title/post/:id", PostLive
     end
   end
 end

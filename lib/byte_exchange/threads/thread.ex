@@ -6,8 +6,10 @@ defmodule ByteExchange.Threads.Thread do
   @foreign_key_type :binary_id
   schema "threads" do
     field :title, :string
+    field :description, :string
     field :subscribers, :integer, default: 0
     field :post_count, :integer, default: 0
+    belongs_to :user, ByteExchange.Accounts.User
     has_many :post, ByteExchange.Posts.Post
 
     timestamps(type: :utc_datetime)
@@ -16,7 +18,8 @@ defmodule ByteExchange.Threads.Thread do
   @doc false
   def changeset(thread, attrs) do
     thread
-    |> cast(attrs, [:title])
-    |> validate_required([:title])
+    |> cast(attrs, [:title, :description, :user_id, :post_count, :subscribers])
+    |> validate_required([:title, :description, :user_id])
+    |> unique_constraint(:title)
   end
 end

@@ -7,7 +7,7 @@ defmodule ByteExchangeWeb.Navbar do
 
   def navbar(assigns) do
     ~H"""
-    <nav class="bg-slate-950 m-2 p-4 rounded-lg flex items-center gap-4 justify-between">
+    <nav class="border border-slate-800 shadow-xl m-2 p-4 rounded-lg flex items-center gap-4 justify-between">
       <div>
         <.link href="/home">Byte Exchange</.link>
       </div>

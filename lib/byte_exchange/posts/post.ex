@@ -10,6 +10,7 @@ defmodule ByteExchange.Posts.Post do
     field :upvote_count, :integer, default: 0
     belongs_to :thread, ByteExchange.Threads.Thread
     belongs_to :user, ByteExchange.Accounts.User
+    has_many :comments, ByteExchange.Comments.Comment
 
     timestamps(type: :utc_datetime)
   end
